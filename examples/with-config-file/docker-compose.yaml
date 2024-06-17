@@ -1,0 +1,145 @@
+version: "3.5"
+
+services:
+  mqtt-fed:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed
+    ports:
+      - '1883:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed:1883
+
+  mqtt-fed-1:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-1
+    depends_on:
+      - mqtt-fed
+    ports:
+      - '1884:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-1.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-1:1883
+
+  mqtt-fed-2:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-2
+    depends_on:
+      - mqtt-fed-1
+    ports:
+      - '1885:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-2.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-2:1883
+
+  mqtt-fed-3:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-3
+    depends_on:
+      - mqtt-fed-2
+    ports:
+      - '1886:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-3.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-3:1883
+
+  mqtt-fed-4:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-4
+    depends_on:
+      - mqtt-fed-3
+    ports:
+      - '1887:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-4.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-4:1883
+
+  mqtt-fed-5:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-5
+    depends_on:
+      - mqtt-fed-4
+    ports:
+      - '1888:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-5.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-5:1883
+
+  mqtt-fed-6:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-6
+    depends_on:
+      - mqtt-fed-5
+    ports:
+      - '1889:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-6.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-6:1883
+
+  mqtt-fed-7:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-7
+    depends_on:
+      - mqtt-fed-6
+    ports:
+      - '1890:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-7.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-7:1883
+
+  mqtt-fed-8:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-8
+    depends_on:
+      - mqtt-fed-7
+    ports:
+      - '1891:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-8.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-8:1883
+
+  mqtt-fed-9:
+    image: brunobevilaquaa/mqtt-fed
+    container_name: mqtt-fed-9
+    depends_on:
+      - mqtt-fed-8
+    ports:
+      - '1892:1883'
+    build:
+      context: ../..
+      dockerfile: ../../Dockerfile
+    environment:
+      - CONFIG_FILE=/config/mqtt-fed-9.yaml
+      - ADVERTISED_LISTENER=tcp://mqtt-fed-9:1883
+
+networks:
+  default:
+    name: federation
+    external: true

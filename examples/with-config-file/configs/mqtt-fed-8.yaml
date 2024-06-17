@@ -1,0 +1,9 @@
+redundancy: 2
+core_ann_interval: 10
+beacon_interval: 5
+id: 8
+neighbors:
+  - id : 5
+    ip : "tcp://mqtt-fed-5:1883"
+  - id : 7
+    ip : "tcp://mqtt-fed-7:1883"
